@@ -1,4 +1,4 @@
-document.addEventListener
+document.addEventListener('DOMContentLoaded', function () {
 
 //Game settings
     const totalQuestions = 10;
@@ -73,3 +73,5 @@ function showFinalScore() {
 submitButton.addEventListener('click', checkAnswer);
 
 generateQuestion();
+
+});
