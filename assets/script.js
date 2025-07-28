@@ -1,83 +1,80 @@
 document.addEventListener("DOMContentLoaded", function () {
-
-//Game settings
+    //Game settings
     const totalQuestions = 10;
-    let currentQuestion = 0
-    let score = 0
+    let currentQuestion = 0;
+    let score = 0;
 
-//Elements from HTML page
+    //Elements from HTML page
     const questionElement = document.getElementById("question");
     const answerInput = document.getElementById("answer");
     const submitButton = document.getElementById("submit-btn");
     const feedbackElement = document.getElementById("feedback");
     const scoreElement = document.getElementById("score");
 
-//Store current correct answer
+    //Current correct answer
     let correctAnswer = 0;
 
-// Math question logic
+    //Math question logic
     function generateQuestion() {
-        const num1 = Math.floor(Math.random() *10) + 1;
-        const num2 = Math.floor(Math.random() *10) + 1;
-        const operators = ["+","-","*","/"];
-        const operator = operators[Math.floor(Math.random()* operators.length)];
+        const num1 = Math.floor(Math.random() * 10) + 1;
+        let num2 = Math.floor(Math.random() * 10) + 1;
+        const operators = ["+", "-", "*", "/"];
+        const operator = operators[Math.floor(Math.random() * operators.length)];
 
-//creating question
-        let questionText = "${num1} ${operator} ${num2}";
+        // Prevent division by zero
+        if (operator === "/" && num2 === 0) {
+            num2 = 1;
+        }
 
-//checking the answer 
+        //Build question text
+        const questionText = `${num1} ${operator} ${num2}`;
+
+        //Calculate correct answer safely
         switch (operator) {
             case "+": correctAnswer = num1 + num2; break;
             case "-": correctAnswer = num1 - num2; break;
             case "*": correctAnswer = num1 * num2; break;
             case "/": correctAnswer = Math.round(num1 / num2); break;
         }
-        
 
-// display the question
-        questionElement.textContent = "Question ${currentQuestion + 1}: ${questionText}";
-        answerInput.value = ";
-        feedbackElement.textContent = ";
+        //Update
+        questionElement.textContent = `Question ${currentQuestion + 1}: ${questionText}`;
+        answerInput.value = "";
+        feedbackElement.textContent = "";
     }
 
-//checking answer is correct
+    //Check user answer
     function checkAnswer() {
-        const userAnswer = parseInt(answerInput.value);
+        const userAnswer = parseFloat(answerInput.value);
 
-//input validation to avoid letters
-        if(isNaN(userAnswer)){
-            feedbackElement.textContent = "Please enter a number!";
+        if (isNaN(userAnswer)) {
+            feedbackElement.textContent = "⚠️ Please enter a valid number!";
             return;
         }
 
-//check answer and update score
-        if(userAnswer === correctAnswer) {
+        if (userAnswer === correctAnswer) {
             score++;
-            feedbackElement.textContent = " ✅ Yes Correct!";
+            feedbackElement.textContent = "✅ Yes, correct!";
         } else {
-            feedbackElement.textContent = " ❌ Sorry that was incorrect the answer, was ${correctAnswer}";
+            feedbackElement.textContent = `❌ Sorry, that was incorrect. The answer was ${correctAnswer}`;
         }
-            
-//Update score display
-    scoreElement.textContent = "Score: ${score}";
 
-//Next question or end game
-    currentQuestion++;
-    if (currentQuestion < totalQuestions) {
-        setTimeout (generateQuestion, 1000);
-    } else {
-        setTimeout(showFinalScore, 1000);
-    }      
-}
+        scoreElement.textContent = `Score: ${score}`;
+        currentQuestion++;
 
-//End of quiz results and scores
-function showFinalScore() {
-    localStorage.setItem("mathsQuizScore", score);
-    window.location.href = "result.html";
-}
+        if (currentQuestion < totalQuestions) {
+            setTimeout(generateQuestion, 1000);
+        } else {
+            setTimeout(showFinalScore, 1000);
+        }
+    }
 
-submitButton.addEventListener("click", checkAnswer);
+    //End of quiz
+    function showFinalScore() {
+        localStorage.setItem("mathsQuizScore", score);
+        window.location.href = "result.html";
+    }
 
-generateQuestion();
-
+    submitButton.addEventListener("click", checkAnswer);
+    generateQuestion();
 });
