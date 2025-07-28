@@ -64,4 +64,12 @@ document.addEventListener
     }      
 }
 
-//End of quiz
+//End of quiz results and scores
+function showFinalScore() {
+    localStorage.setItem('mathsQuizScore', score);
+    window.location.href = 'result.html';
+}
+
+submitButton.addEventListener('click', checkAnswer);
+
+generateQuestion();
