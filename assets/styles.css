@@ -4,9 +4,10 @@ body{
     text-align: center;
     padding: 20px;
 }
-h1.h2 {
+h1, h2 {
     color: #4f46e5;
     margin-bottom: 20px;
+    font-size: 5rem;
 }
 
 /* Buttons */
@@ -30,6 +31,11 @@ button:hover {
 
 button:active {
   transform: scale(0.95);
+}
+
+#question {
+  opacity: 0;
+  animation: fadeIn 0.6s ease forwards;
 }
 
 
