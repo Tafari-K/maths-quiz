@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
             case "+": correctAnswer = num1 + num2; break;
             case "-": correctAnswer = num1 - num2; break;
             case "*": correctAnswer = num1 * num2; break;
-            case "/": correctAnswer = Math.round(num1 / num2); break;
+            case "/": correctAnswer = num1 / num2; break;
         }
 
         let displayOperator;
