@@ -17,7 +17,7 @@ img {
     height: auto;
     border-radius: 10px;
 }
-/* Buttons */
+
 button {
   padding: 15px 20px;
   display: block;
@@ -55,6 +55,6 @@ ol {
     button {
         width: 100%;
         font-size: 1.1rem;
-        padding: 14px, ;
+        padding: 14px;
     }
 }
