@@ -25,10 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (operator === "/" && num2 === 0) {
             num2 = 1;
         }
-
-        //Build question text
-        const questionText = `${num1} ${operator} ${num2}`;
-
+        
         //Calculate correct answer safely
         switch (operator) {
             case "+": correctAnswer = num1 + num2; break;
@@ -37,7 +34,16 @@ document.addEventListener("DOMContentLoaded", function () {
             case "/": correctAnswer = Math.round(num1 / num2); break;
         }
 
+        let displayOperator;
+            switch (operator) {
+            case "+": displayOperator = "+"; break;
+            case "-": displayOperator = "−"; break;
+            case "*": displayOperator = "×"; break;
+            case "/": displayOperator = "÷"; break;
+        }
+
         //Update
+        const questionText = `${num1} ${displayOperator} ${num2}`;
         questionElement.textContent = `Question ${currentQuestion + 1}: ${questionText}`;
         answerInput.value = "";
         feedbackElement.textContent = "";
