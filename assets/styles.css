@@ -42,8 +42,10 @@ button:active {
 
 
 
-ul {
-    list-style: none;
+ol {
+    text-align: left;
+    max-width: 600px;
+    margin: auto;
 }
 
 @media(max-width: 600px) {
