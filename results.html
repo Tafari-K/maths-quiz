@@ -7,14 +7,19 @@
     <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-    <h2>Quiz Finished</h2>
-    <p id="final-score"></p>
-    <form action="https://formdump.codeinstitute.net" method="POST">
-        <input type="text" id="player-name" placeholder="Enter your name">
-        <button> Submit Scores</button>
-    </form>
-    <img id="mascot" src="assets/images/maths-quest-mascot.jpeg" alt="Maths quest mascot">
-    <button onclick="location.href='index.html'">Back to Main Page</button>
+    <header>
+        <h1>Quiz Finished</h1>
+    </header>
+    <main>
+        <p id="final-score"></p>
+        <form action="https://formdump.codeinstitute.net" method="POST">
+            <label for="player-name">Your Name:</label>
+            <input type="text" id="player-name" placeholder="Enter your name">
+            <button> Submit Scores</button>
+        </form>
+        <img id="mascot" src="assets/images/maths-quest-mascot.jpeg" alt="Maths quest mascot">
+        <button onclick="location.href='index.html'">Back to Main Page</button>
+    </main>
     <script src="assets/results.js" defer></script>
 </body>
 </html>
