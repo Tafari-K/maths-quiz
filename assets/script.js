@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const scoreElement = document.getElementById("score");
 
     //Current correct answer
-    let correctAnswer = 0;
+    let correctAnswer = 1;
 
     //Math question logic
     function generateQuestion() {
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //End of quiz
     function showFinalScore() {
         localStorage.setItem("mathsQuizScore", score);
-        window.location.href = "result.html";
+        window.location.href = "results.html";
     }
 
     submitButton.addEventListener("click", checkAnswer);
