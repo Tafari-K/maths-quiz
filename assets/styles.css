@@ -103,13 +103,46 @@ ol {
     font-size: 1rem;
 }
 
-@media(max-width: 600px) {
-    h1 {
-        font-size: 3rem;
+@media (max-width: 600px) {
+    body {
+        padding: 1rem;
     }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    #question {
+        margin-bottom: 1rem;
+    }
+
+    #answer {
+        margin-top: 0.5rem;
+    }
+    
+    #final-score {
+        font-size: 1.3rem;
+    }
+
+    #results {
+        width: 100%;
+        gap: 0.75rem;
+    }
+
+    #player-name {
+        width: 100%;
+        font-size: 1rem;
+        padding: 12px;
+    }
+
     button {
         width: 100%;
-        font-size: 1.1rem;
+        font-size: 1.05rem;
         padding: 14px;
+    }
+
+    #mascot {
+        width: 150px;
+        margin-top: 1rem;
     }
 }
