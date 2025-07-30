@@ -4,7 +4,7 @@ body{
     text-align: center;
     padding: 20px;
 }
-h1, h2 {
+h1 {
     color: #4f46e5;
     margin-bottom: 20px;
     font-size: 5rem;
@@ -22,7 +22,8 @@ button {
   padding: 15px 20px;
   display: block;
   width: 90%;
-  font-size: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
   margin: 20px auto 10px auto;
   border-radius: 10px;
   background-color: #4f46e5;
@@ -40,12 +41,11 @@ button:active {
   transform: scale(0.95);
 }
 
-
-
 ol {
     text-align: left;
     max-width: 600px;
     margin: auto;
+    font-size: 1rem;
 }
 
 @media(max-width: 600px) {
