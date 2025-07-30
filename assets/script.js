@@ -10,17 +10,23 @@ document.addEventListener("DOMContentLoaded", function () {
     const submitButton = document.getElementById("submit-btn");
     const feedbackElement = document.getElementById("feedback");
     const scoreElement = document.getElementById("score");
+    const answerForm = document.getElementById("answer-form");
 
     //Current correct answer
     let correctAnswer = 1;
 
     //Math question logic
     function generateQuestion() {
-        const num1 = Math.floor(Math.random() * 10) + 1;
-        let num2 = Math.floor(Math.random() * 10) + 1;
-        const operators = ["+", "-", "*", "/"];
-        const operator = operators[Math.floor(Math.random() * operators.length)];
+        if (operator === "/") {
+            correctAnswer = Math.floor(random() * 5) + 1;
+            num2 = Math.floor(Math.random() * 9) + 1;
+            num1 = correctAnswer * num2;
+        } else {
+            num1 = Math.floor(Math.random() * 10) + 1;
+            num2 = Math.floor(Math.random() * 10) + 1;
+        }
 
+        
         // Prevent division by zero
         if (operator === "/" && num2 === 0) {
             num2 = 1;
@@ -48,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
         answerInput.value = "";
         feedbackElement.textContent = "";
     }
-    
+
     answerForm.addEventListener("submit", (e) => e.preventDefault());
     //Check user answer
     function checkAnswer() {
