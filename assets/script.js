@@ -48,7 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
         answerInput.value = "";
         feedbackElement.textContent = "";
     }
-
+    
+    answerForm.addEventListener("submit", (e) => e.preventDefault());
     //Check user answer
     function checkAnswer() {
         const userAnswer = parseFloat(answerInput.value);
