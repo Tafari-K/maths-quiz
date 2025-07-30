@@ -119,20 +119,26 @@ ol {
     #answer {
         margin-top: 0.5rem;
     }
-    
+
     #final-score {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
+        text-align: center;
+        margin-bottom: 1rem;
     }
 
-    #results {
+    form#results {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
         width: 100%;
-        gap: 0.75rem;
+        margin-bottom: 1rem;
     }
 
-    #player-name {
+     input#player-name {
         width: 100%;
         font-size: 1rem;
         padding: 12px;
+        box-sizing: border-box;
     }
 
     button {
