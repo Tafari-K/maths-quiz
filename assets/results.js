@@ -3,36 +3,58 @@ document.addEventListener("DOMContentLoaded", function () {
     const leaderboardElement = document.getElementById("leaderboard");
     const scoreForm = document.getElementById("score-form");
 
-    const score = localStorage.getItem("mathsQuizScore");
+    // Get score from localStorage and ensure it's a number
+    const score = parseInt(localStorage.getItem("mathsQuizScore"), 10);
 
-    if (score !== null) {
-        finalScoreElement.textContent = ` You scored ${score} out of 10!`;
+    if (!isNaN(score)) {
+        finalScoreElement.textContent = `You scored ${score} out of 10!`;
     } else {
-        finalScoreElement.textContent = "No score found. Please play the quiz"
+        finalScoreElement.textContent = "No score found. Please play the quiz.";
     }
 
-    leaderboardElement.innerHTML = "";
-    const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
-    leaderboard.sort((a, b) => b.score - a.score);
-    leaderboard.forEach((player, index) => {
-        const li = document.createElement("li");
-        li.textContent = `${index + 1}. ${player.name}: ${player.score}`;
-        leaderboardElement.appendChild(li);
-    });
-
-    scoreForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-        const playerName = document.getElementById("player-name").value;
-        const score = localStorage.getItem("mathsQuizScore");
-        const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
-        leaderboard.push({ name: playerName, score: score });
-        localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+    // Function to render leaderboard
+    function renderLeaderboard() {
         leaderboardElement.innerHTML = "";
+
+        const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+
         leaderboard.sort((a, b) => b.score - a.score);
+
         leaderboard.forEach((player, index) => {
             const li = document.createElement("li");
             li.textContent = `${index + 1}. ${player.name}: ${player.score}`;
             leaderboardElement.appendChild(li);
         });
+    }
+
+    renderLeaderboard();
+
+    // Handle score submission
+    scoreForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const playerNameInput = document.getElementById("player-name");
+        const playerName = playerNameInput.value.trim();
+
+        if (!playerName) {
+            alert("Please enter your name before submitting.");
+            return;
+        }
+
+        if (isNaN(score)) {
+            alert("No score available to submit.");
+            return;
+        }
+
+        // Get existing leaderboard or create new one
+        const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+        leaderboard.push({ name: playerName, score: score });
+
+        localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+
+        playerNameInput.value = ""; 
+
+        renderLeaderboard(); 
     });
-})
+});
