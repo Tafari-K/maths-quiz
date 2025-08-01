@@ -56,6 +56,12 @@ button {
     box-shadow: 0 0 0 3px #007bff40;
 }
 
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 #feedback {
     min-height: 2.5rem;
     font-size: 1.2rem;
@@ -100,8 +106,8 @@ ol {
     text-align: left;
     max-width: 600px;
     margin: auto;
-    font-size: 1rem;
-}
+    font-size: 1.2rem;
+}   
 
 @media (max-width: 600px) {
     body {
