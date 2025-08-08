@@ -102,6 +102,15 @@ button:active {
     box-shadow: 0 0 0 3px rgba(0,123,255,0.2);
 }
 
+#player-name {
+    width: 200px;
+    height: 40px;
+    font-size: 1.2rem;
+    padding: 10px;
+    border-radius: 10px;
+
+}
+
 ol {
     text-align: left;
     max-width: 600px;
