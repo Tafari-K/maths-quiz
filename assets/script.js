@@ -1,8 +1,16 @@
+/* global document, window, localStorage, setTimeout */
 document.addEventListener("DOMContentLoaded", function () {
     // Game settings
     const totalQuestions = 10;
+    const minNumber = 1;
+    const maxNumber = 10;
+    const maxDivisionAnswer = 5;
+    const feedbackDelay = 1000;
+    
+    // Game state
     let currentQuestion = 0;
     let score = 0;
+    let correctAnswer = 1;
 
     // Elements from HTML page
     const questionElement = document.getElementById("question");
@@ -10,14 +18,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const submitButton = document.getElementById("submit-btn");
     const feedbackElement = document.getElementById("feedback");
     const scoreElement = document.getElementById("score");
-    const answerForm = document.getElementById("answer-form"); // ✅ added definition
-
-    // Current correct answer
-    let correctAnswer = 1;
+    const answerForm = document.getElementById("answer-form");
 
     // Math question logic
     function generateQuestion() {
-        let num1, num2;
+        let num1; 
+        let num2;
         const operators = ["+", "-", "*", "/"];
         const operator = operators[Math.floor(Math.random() * operators.length)];
 
@@ -46,7 +52,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const questionText = `${num1} ${displayOperator} ${num2}`;
-        questionElement.textContent = `Question ${currentQuestion + 1}: ${questionText}`;
+        questionElement.textContent = 
+            `Question ${currentQuestion + 1}: ${questionText}`;
         answerInput.value = "";
         feedbackElement.textContent = "";
     }
@@ -58,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function checkAnswer() {
         const userAnswer = parseFloat(answerInput.value);
 
-        if (isNaN(userAnswer)) {
+        if (Number.isNaN(userAnswer)) {
             feedbackElement.textContent = "⚠️ Please enter a valid number!";
             return;
         }
@@ -67,11 +74,12 @@ document.addEventListener("DOMContentLoaded", function () {
             score++;
             feedbackElement.textContent = "✅ Yes, correct!";
         } else {
-            feedbackElement.textContent = `❌ Sorry, that was incorrect. The answer was ${correctAnswer}`;
+            feedbackElement.textContent = `❌ Sorry, that was incorrect.` +  
+                                        `The answer was ${correctAnswer}`;
         }
 
         scoreElement.textContent = `Score: ${score}`;
-        currentQuestion++;
+        currentQuestion+=1;
 
         if (currentQuestion < totalQuestions) {
             setTimeout(generateQuestion, 1000);
