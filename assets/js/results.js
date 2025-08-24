@@ -2,8 +2,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const finalScoreElement = document.getElementById("final-score");
     const leaderboardElement = document.getElementById("leaderboard");
     const scoreForm = document.getElementById("score-form");
+    const clearScoresBtn = document.getElementById("clear-scores");
 
-    // Get score from localStorage
+    // Get score from localStorage and ensure it's a number
     const score = parseInt(localStorage.getItem("mathsQuizScore"), 10);
 
     if (!isNaN(score)) {
@@ -16,6 +17,12 @@ document.addEventListener("DOMContentLoaded", function () {
     function renderLeaderboard() {
         leaderboardElement.innerHTML = "";
         const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+        if (leaderboard.length === 0) {
+            clearScoresBtn.style.display = "none"; // hide if no scores
+        } else {
+            clearScoresBtn.style.display = "block"; // show if scores exist
+        }
 
         leaderboard.sort((a, b) => b.score - a.score);
 
@@ -69,5 +76,14 @@ document.addEventListener("DOMContentLoaded", function () {
         // Lock form
         playerNameInput.disabled = true;
         scoreForm.querySelector("button[type='submit']").disabled = true;
+    });
+
+    // Clear Scores Button logic
+    clearScoresBtn.addEventListener("click", function () {
+        if (confirm("Are you sure you want to clear all scores?")) {
+            localStorage.removeItem("leaderboard");
+            localStorage.removeItem("scoreSubmitted");
+            renderLeaderboard(); // refresh empty leaderboard
+        }
     });
 });

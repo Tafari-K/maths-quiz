@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const maxNumber = 10;
     const maxDivisionAnswer = 5;
     const feedbackDelay = 1000;
+
+    localStorage.setItem("scoreSubmitted", "false");
     
     // Game state
     let currentQuestion = 0;
