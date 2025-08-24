@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const minNumber = 1;
     const maxNumber = 10;
     const maxDivisionAnswer = 5;
-    const feedbackDelay = 1000;
+    const feedbackDelay = 3000;
 
     localStorage.setItem("scoreSubmitted", "false");
     
