@@ -84,9 +84,9 @@ document.addEventListener("DOMContentLoaded", function () {
         currentQuestion+=1;
 
         if (currentQuestion < totalQuestions) {
-            setTimeout(generateQuestion, 1000);
+            setTimeout(generateQuestion, 3000);
         } else {
-            setTimeout(showFinalScore, 1000);
+            setTimeout(showFinalScore, 3000);
         }
     }
 
