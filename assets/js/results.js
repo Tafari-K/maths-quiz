@@ -45,16 +45,21 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("No score available to submit.");
             return;
         }
-
-        // Get existing leaderboard or create new one
-        const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
-
-        leaderboard.push({ name: playerName, score: score });
-
-        localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+        const leaderboard = JSON.parse(localStorage.getItem("leaderboard"))
+            if (leaderboard.length>0) {
+                alert("You've already submitted your score - play again to submit a new one.");
+                return;
+            }
+        // Single save entry
+        localStorage.setItem("leaderboard", JSON.stringify([{
+            name: playerName, score: score}
+        ]));
 
         playerNameInput.value = ""; 
 
-        renderLeaderboard(); 
+        renderLeaderboard();
+
+        playerNameInput.disabled = true;
+        scoreForm.querySelector("button[type='submit']").disabled = true;
     });
 });

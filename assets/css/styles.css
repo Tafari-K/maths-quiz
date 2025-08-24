@@ -85,6 +85,7 @@ button:active {
 }
 
 #final-score {
+    list-style: none;
     min-height: 2.5rem;
     font-size: 1.6rem;
     font-weight: bold;
