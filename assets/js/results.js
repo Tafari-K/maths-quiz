@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const leaderboardElement = document.getElementById("leaderboard");
     const scoreForm = document.getElementById("score-form");
 
-    // Get score from localStorage and ensure it's a number
+    // Get score from localStorage
     const score = parseInt(localStorage.getItem("mathsQuizScore"), 10);
 
     if (!isNaN(score)) {
@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Function to render leaderboard
     function renderLeaderboard() {
         leaderboardElement.innerHTML = "";
-
         const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
 
         leaderboard.sort((a, b) => b.score - a.score);
@@ -29,9 +28,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     renderLeaderboard();
 
+    // Check if this game score was already submitted
+    const alreadySubmitted = localStorage.getItem("scoreSubmitted") === "true";
+    if (alreadySubmitted) {
+        document.getElementById("player-name").disabled = true;
+        scoreForm.querySelector("button[type='submit']").disabled = true;
+    }
+
     // Handle score submission
     scoreForm.addEventListener("submit", function (event) {
         event.preventDefault();
+
+        if (localStorage.getItem("scoreSubmitted") === "true") {
+            alert("You've already submitted this score. Play again to submit a new one.");
+            return;
+        }
 
         const playerNameInput = document.getElementById("player-name");
         const playerName = playerNameInput.value.trim();
@@ -45,20 +56,17 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("No score available to submit.");
             return;
         }
-        const leaderboard = JSON.parse(localStorage.getItem("leaderboard"))
-            if (leaderboard.length>0) {
-                alert("You've already submitted your score - play again to submit a new one.");
-                return;
-            }
-        // Single save entry
-        localStorage.setItem("leaderboard", JSON.stringify([{
-            name: playerName, score: score}
-        ]));
 
-        playerNameInput.value = ""; 
+        const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+        leaderboard.push({ name: playerName, score: score });
+        localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+
+        // Mark this score as submitted
+        localStorage.setItem("scoreSubmitted", "true");
 
         renderLeaderboard();
 
+        // Lock form
         playerNameInput.disabled = true;
         scoreForm.querySelector("button[type='submit']").disabled = true;
     });
